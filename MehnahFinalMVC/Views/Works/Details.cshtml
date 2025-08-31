@@ -1,0 +1,49 @@
+﻿@model MehnahFinalApi.DTO.WorkDto
+
+@{
+    ViewData["Title"] = "Work Details";
+}
+
+<h2>Work Details</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td>@Model.Category</td>
+    </tr>
+    <tr>
+        <th>Contact Method</th>
+        <td>@Model.ContactMethod</td>
+    </tr>
+    <tr>
+        <th>Available</th>
+        <td>@(Model.IsAvailable ? "Yes" : "No")</td>
+    </tr>
+    <tr>
+        <th>Image</th>
+        <td>
+            @if (!string.IsNullOrEmpty(Model.WorkImagesUrl))
+            {
+                <img src="@Model.WorkImagesUrl" alt="Work Image" width="150" />
+            }
+            else
+            {
+                <span>No Image</span>
+            }
+        </td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

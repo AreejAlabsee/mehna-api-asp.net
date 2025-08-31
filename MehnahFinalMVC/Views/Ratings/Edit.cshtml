@@ -1,0 +1,77 @@
+﻿@* @model MehnahFinalMVC.ViewModels.RatingViewModel
+
+@{
+    ViewData["Title"] = "Edit Rating";
+}
+
+<h1>Edit Rating</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Stars"></label>
+        <input asp-for="Stars" class="form-control" />
+        <span asp-validation-for="Stars" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Comment"></label>
+        <input asp-for="Comment" class="form-control" />
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReviewerName"></label>
+        <input asp-for="ReviewerName" class="form-control" />
+        <span asp-validation-for="ReviewerName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="WorkId"></label>
+        <input asp-for="WorkId" class="form-control" />
+        <span asp-validation-for="WorkId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Save</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Cancel</a>
+</form> *@
+
+@model MehnahFinalMVC.ViewModels.RatingViewModel
+
+@{
+    ViewData["Title"] = "Edit Rating";
+}
+
+<h2>Edit Rating</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Stars" class="control-label"></label>
+        <input asp-for="Stars" class="form-control" />
+        <span asp-validation-for="Stars" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Comment" class="control-label"></label>
+        <textarea asp-for="Comment" class="form-control"></textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReviewerName" class="control-label"></label>
+        <input asp-for="ReviewerName" class="form-control" />
+        <span asp-validation-for="ReviewerName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="WorkId" class="control-label"></label>
+        <input asp-for="WorkId" class="form-control" />
+        <span asp-validation-for="WorkId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

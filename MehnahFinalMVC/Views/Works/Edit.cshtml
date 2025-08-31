@@ -1,0 +1,56 @@
+﻿@model MehnahFinalApi.DTO.WorkDto
+
+@{
+    ViewData["Title"] = "Edit Work";
+}
+
+<h2>Edit Work</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Price</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Category</label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Contact Method</label>
+        <input asp-for="ContactMethod" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>User Id</label>
+        <input asp-for="UserId" class="form-control" />
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Available</label>
+        <input asp-for="IsAvailable" type="checkbox" class="form-check-input" />
+    </div>
+
+    <div class="form-group">
+        <label>Work Image</label>
+        <input asp-for="WorkImages" type="file" class="form-control" />
+        @if (!string.IsNullOrEmpty(Model.WorkImagesUrl))
+        {
+            <p>Current Image:</p>
+            <img src="@Model.WorkImagesUrl" width="150" />
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

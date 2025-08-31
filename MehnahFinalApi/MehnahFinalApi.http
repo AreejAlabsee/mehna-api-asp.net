@@ -1,0 +1,6 @@
+@MehnahFinalApi_HostAddress = http://localhost:5254
+
+GET {{MehnahFinalApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,41 @@
+﻿@model List<MehnahFinalMVC.ViewModels.RatingViewModel>
+
+@{
+    ViewData["Title"] = "Ratings";
+}
+
+<h1>Ratings</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Rating</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Stars</th>
+            <th>Comment</th>
+            <th>Reviewer</th>
+            <th>Work Id</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rating in Model)
+        {
+            <tr>
+                <td>@rating.Stars</td>
+                <td>@rating.Comment</td>
+                <td>@rating.ReviewerName</td>
+                <td>@rating.WorkId</td>
+                <td>@rating.CreatedAt.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@rating.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@rating.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@rating.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

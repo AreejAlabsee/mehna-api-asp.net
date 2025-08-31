@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Profile - Mehnah</title>
+    <style>
+        :root {
+            --primary-color: #384236;
+            --secondary-color: #A0A091;
+            --text-color: #333;
+            --light-bg: #EAEAE0;
+            --white-bg: #ffffff;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--white-bg);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            background-color: var(--white-bg);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+            .nav-links li {
+                margin-right: 25px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text-color);
+                font-weight: 500;
+                transition: color 0.3s;
+            }
+
+                .nav-links a:hover {
+                    color: var(--primary-color);
+                }
+
+        /* Worker Profile Section */
+        .worker-profile-section {
+            padding: 50px 0;
+            position: relative;
+            background-color: var(--white-bg);
+            overflow: hidden;
+        }
+
+        .worker-profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+            padding-right: 20px;
+        }
+
+        .profile-image-container {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            box-shadow: var(--box-shadow);
+        }
+
+            .profile-image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .profile-info {
+            text-align: right;
+        }
+
+            .profile-info h1 {
+                margin: 0;
+                font-size: 1.8rem;
+                color: var(--primary-color);
+            }
+
+            .profile-info p {
+                margin: 5px 0;
+                color: var(--secondary-color);
+                font-size: 1rem;
+            }
+
+        .rating {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+            .rating .star {
+                color: #FFD700;
+                margin: 0 2px;
+                font-size: 1.2rem;
+            }
+
+        /* Hero image with shapes */
+        .hero-shapes {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+            .hero-shapes img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: scaleX(1);
+            }
+
+        /* Previous Work Section */
+        .prev-work-section {
+            padding: 50px 0;
+            background-color: var(--light-bg);
+        }
+
+            .prev-work-section h2 {
+                font-size: 1.5rem;
+                color: var(--primary-color);
+                margin-bottom: 30px;
+            }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .work-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            height: 200px;
+        }
+
+            .work-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+                .work-item img:hover {
+                    transform: scale(1.05);
+                }
+
+        .add-work-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+            .add-work-btn:hover {
+                background-color: #2a3328;
+            }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+            footer .logo {
+                font-size: 1.2rem;
+                color: #fff;
+            }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header">
+            <div class="logo">Mehnah</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#">Workers</a></li>
+                    <li><a href="#">App</a></li>
+                    <li><a href="#">Comment</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="worker-profile-section">
+            <div class="container worker-profile-container">
+                <div class="profile-image-container">
+                    <img id="worker-profile-image" src="https://via.placeholder.com/150" alt="Worker's Profile Picture">
+                </div>
+                <div class="profile-info">
+                    <h1 id="worker-name"></h1>
+                    <p id="worker-skill"></p>
+                    <div class="rating" id="worker-rating"></div>
+                </div>
+            </div>
+            <div class="hero-shapes">
+                <img src="@Url.Content("~/images/worker.png")" alt="Decorative shapes" />
+            </div>
+        </section>
+
+        <section class="prev-work-section">
+            <div class="container">
+                <h2>Previuse Work</h2>
+                <div class="work-grid" id="work-grid-container">
+                    <p id="loading-work-message">Loading previous work...</p>
+                </div>
+                <a href="#" class="add-work-btn">Add Work</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo">Mehnah</div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to generate star icons
+            function getStarRating(stars) {
+                let ratingHtml = '';
+                for (let i = 0; i < 5; i++) {
+                    ratingHtml += `<span class="star">${i < stars ? '★' : '☆'}</span>`;
+                }
+                return ratingHtml;
+            }
+
+            // Fetch Worker data
+            async function fetchWorkerData() {
+                try {
+                    const response = await fetch('/api/worker/1'); // Fetching data for a specific worker
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const worker = await response.json();
+
+                    // Update profile section
+                    document.getElementById('worker-profile-image').src = worker.profileImage || 'https://via.placeholder.com/150';
+                    document.getElementById('worker-name').textContent = worker.name || 'Worker Name';
+                    document.getElementById('worker-skill').textContent = worker.skill || 'Unspecified skill';
+                    document.getElementById('worker-rating').innerHTML = getStarRating(worker.averageRating);
+                } catch (error) {
+                    console.error("Could not fetch worker data:", error);
+                    document.getElementById('worker-name').textContent = 'Failed to load worker data.';
+                }
+            }
+
+            // Fetch Previous Work
+            async function fetchPreviousWork() {
+                const workGridContainer = document.getElementById('work-grid-container');
+                try {
+                    const response = await fetch('/api/worker/1/works');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const works = await response.json();
+                    workGridContainer.innerHTML = '';
+                    works.forEach(work => {
+                        const workItem = document.createElement('div');
+                        workItem.classList.add('work-item');
+                        workItem.innerHTML = `<img src="${work.imageUrl || 'https://via.placeholder.com/200'}" alt="Previous work image">`;
+                        workGridContainer.appendChild(workItem);
+                    });
+                } catch (error) {
+                    console.error("Could not fetch previous work:", error);
+                    workGridContainer.innerHTML = `<p style="color: red; text-align: center;">Failed to load previous work. Please try again later.</p>`;
+                }
+            }
+
+            fetchWorkerData();
+            fetchPreviousWork();
+        });
+    </script>
+</body>
+</html>

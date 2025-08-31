@@ -1,0 +1,49 @@
+﻿@model MehnahFinalApi.DTO.WorkDto
+
+@{
+    ViewData["Title"] = "Create Work";
+}
+
+<h2>Create New Work</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Price</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Category</label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Contact Method</label>
+        <input asp-for="ContactMethod" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>User Id</label>
+        <input asp-for="UserId" class="form-control" />
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Available</label>
+        <input asp-for="IsAvailable" type="checkbox" />
+    </div>
+
+    <div class="form-group">
+        <label>Work Image</label>
+        <input asp-for="WorkImages" type="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
