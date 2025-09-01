@@ -1,0 +1,19 @@
+﻿@model MehnahFinalApi.DTO.WorkDto
+
+@{
+    ViewData["Title"] = "حذف العمل";
+}
+
+<h2>حذف العمل</h2>
+
+<p>هل أنت متأكد من حذف العمل التالي؟</p>
+
+<p>
+    <strong>@Model.Description</strong> - السعر: @Model.Price
+</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">نعم، احذف</button>
+    <a asp-action="Index">إلغاء</a>
+</form>

@@ -15,39 +15,39 @@ namespace MehnahFinalMVC.Controllers
             _httpClient.BaseAddress = new Uri("http://192.168.1.104:7232/api/");
         }
 
-        // ✅ 1. عرض قائمة الأعمال
-        //public async Task<IActionResult> Index()
-        //{
-        //    var response = await _httpClient.GetAsync("Works");
-        //    if (!response.IsSuccessStatusCode) return View(new List<WorkDto>());
-
-        //    var works = await response.Content.ReadFromJsonAsync<List<WorkDto>>();
-        //    return View(works);
-        //}
-        // داخل الـ Controller
+        // ✅ 1. عرض قائمة الأعمال + التقييمات (بشكل منفصل)
         public async Task<IActionResult> Index()
         {
-            var response = await _httpClient.GetAsync("Works");
+            var vm = new HomeViewModel();
 
-            // إذا لم ينجح الطلب، قم بإنشاء ViewModel فارغ
-            if (!response.IsSuccessStatusCode)
+            // جلب الأعمال
+            var worksResponse = await _httpClient.GetAsync("Works");
+            if (worksResponse.IsSuccessStatusCode)
             {
-                return View(new HomeViewModel());
+                vm.Works = await worksResponse.Content.ReadFromJsonAsync<List<WorkDto>>();
             }
 
-            // قراءة البيانات من الرد
-            var works = await response.Content.ReadFromJsonAsync<List<WorkDto>>();
-
-            // إنشاء ViewModel جديد وتعبئته بالبيانات
-            var viewModel = new HomeViewModel
+            // جلب التقييمات
+            var ratingsResponse = await _httpClient.GetAsync("Ratings");
+            if (ratingsResponse.IsSuccessStatusCode)
             {
-                Works = works
-            };
+                vm.Ratings = await ratingsResponse.Content.ReadFromJsonAsync<List<RatingResponseDto>>();
+            }
 
-            // إرجاع الـ ViewModel الصحيح إلى العرض
-            return View(viewModel);
+            // جلب العمال
+            var workersResponse = await _httpClient.GetAsync("Users");
+            if (workersResponse.IsSuccessStatusCode)
+            {
+                vm.Users = await workersResponse.Content.ReadFromJsonAsync<List<UserDto>>();
+                // ✅ سيقرأ ProfileImageUrl فقط
+            }
+
+
+            return View(vm);
         }
-        // ✅ 2. عرض التفاصيل
+
+
+        // ✅ 2. عرض تفاصيل عمل معين مع تقييماته
         public async Task<IActionResult> Details(int id)
         {
             var workResponse = await _httpClient.GetAsync($"Works/{id}");
@@ -101,7 +101,7 @@ namespace MehnahFinalMVC.Controllers
             return View(dto);
         }
 
-        // ✅ 4. تعديل
+        // ✅ 4. تعديل عمل
         public async Task<IActionResult> Edit(int id)
         {
             var response = await _httpClient.GetAsync($"Works/{id}");
@@ -138,7 +138,7 @@ namespace MehnahFinalMVC.Controllers
             return View(dto);
         }
 
-        // ✅ 5. حذف
+        // ✅ 5. حذف عمل
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _httpClient.GetAsync($"Works/{id}");
@@ -151,7 +151,7 @@ namespace MehnahFinalMVC.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var response = await _httpClient.DeleteAsync($"Works/{id}");
+            await _httpClient.DeleteAsync($"Works/{id}");
             return RedirectToAction("Index");
         }
     }

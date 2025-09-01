@@ -7,7 +7,7 @@
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public string UserType { get; set; }
-        //public IFormFile ProfileImage { get; set; }
+        public IFormFile ProfileImage { get; set; }
         public string ProfileImageUrl { get; set; } // ✅ هنا فقط
     }
 }

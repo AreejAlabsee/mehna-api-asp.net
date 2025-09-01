@@ -1,42 +1,62 @@
-﻿@model MehnahFinalApi.DTO.UserReadDto
+﻿@model MehnahFinalApi.DTO.UserDto
 
 @{
     ViewData["Title"] = "Edit Worker";
 }
 
-<h2>Edit Work</h2>
+<h2 class="mb-4">Edit Worker</h2>
 
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Id" />
+<div class="card shadow-sm p-4" style="max-width:600px; margin:auto;">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
 
-    <div class="form-group">
-        <label>Name</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter full name" />
+        </div>
 
-    <div class="form-group">
-        <label>Password</label>
-        <input asp-for="Password" class="form-control" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+        </div>
 
-    <div class="form-group">
-        <label>PhoneNumber</label>
-        <input asp-for="PhoneNumber"  class="form-control" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" />
+        </div>
 
- 
+        <div class="mb-3">
+            <label asp-for="UserType" class="form-label">User Type</label>
+            <select asp-for="UserType" class="form-select">
+                <option value="">Select Type</option>
+                <option value="Worker">Worker</option>
+                <option value="Client">Client</option>
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label>Profile Image</label>
-        <input asp-for="ProfileImageUrl" type="file" class="form-control" />
-        @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
-        {
-            <p>Current Image:</p>
-            <img src="@Model.ProfileImageUrl" width="150" />
-        }
-    </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+        <div class="mb-3">
+            <label class="form-label">Current Profile Image</label><br />
+            @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+            {
+                <img src="@($"http://192.168.1.104:7232/{Model.ProfileImageUrl}")" 
+                     class="rounded-circle mb-2" style="width:100px; height:100px; object-fit:cover;" />
+            }
+            else
+            {
+                <img src="/images/default-user.png" 
+                     class="rounded-circle mb-2" style="width:100px; height:100px; object-fit:cover;" />
+            }
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="ProfileImage" class="form-label">Update Profile Image</label>
+            <input type="file" asp-for="ProfileImage" class="form-control" />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 
 namespace MehnahFinalApi.DTO
@@ -13,11 +14,13 @@ namespace MehnahFinalApi.DTO
 
 
 
-      public IFormFile? ProfileImage { get; set; } // ✅ هنا فقط
 
         public string? ProfileImageUrl { get; set; } // ✅ هنا فقط
 
-
+        
+        [Required]
+        [JsonIgnore]
+        public IFormFile? ProfileImage { get; set; } // ✅ هنا فقط
 
 
     }

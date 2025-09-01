@@ -116,6 +116,7 @@ namespace MehnahFinalApi.Controllers
                 Password = dto.Password,
                 UserType = dto.UserType,
                 ProfileImage = "/images/" + fileName
+               
             };
 
             _context.Users.Add(user);

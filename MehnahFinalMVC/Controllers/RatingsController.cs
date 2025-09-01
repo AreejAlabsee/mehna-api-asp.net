@@ -99,8 +99,7 @@
 //            return RedirectToAction(nameof(Index));
 //        }
 //    }
-//}
-
+//}using MehnahFinalMVC.ViewModels;
 using MehnahFinalMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
@@ -112,101 +111,148 @@ namespace MehnahFinalMVC.Controllers
     {
         private readonly HttpClient _httpClient;
 
-        public RatingsController(HttpClient httpClient)
+        public RatingsController(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("http://192.168.1.104:7232/api/"); // رابط الـ API
+            _httpClient = httpClientFactory.CreateClient();
+            _httpClient.BaseAddress = new Uri("http://192.168.1.104:7232/api/");
         }
 
-        // GET: Rating
+        // GET: Ratings
         public async Task<IActionResult> Index()
         {
-            var ratings = await _httpClient.GetFromJsonAsync<List<RatingViewModel>>("Ratings");
-            return View(ratings);
+            try
+            {
+                var ratings = await _httpClient.GetFromJsonAsync<List<RatingViewModel>>("Ratings");
+                return View(ratings ?? new List<RatingViewModel>());
+            }
+            catch
+            {
+                TempData["Error"] = "Failed to load ratings from API.";
+                return View(new List<RatingViewModel>());
+            }
         }
 
-        // GET: Rating/Details/5
+        // GET: Ratings/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var rating = await _httpClient.GetFromJsonAsync<RatingViewModel>($"Ratings/{id}");
-            if (rating == null) return NotFound();
-
-            return View(rating);
+            try
+            {
+                var rating = await _httpClient.GetFromJsonAsync<RatingViewModel>($"Ratings/{id}");
+                if (rating == null) return NotFound();
+                return View(rating);
+            }
+            catch
+            {
+                TempData["Error"] = "Failed to load rating details.";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
-        // GET: Rating/Create
+        // GET: Ratings/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Rating/Create
+        // POST: Ratings/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RatingViewModel rating)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(rating);
+
+            try
             {
                 var response = await _httpClient.PostAsJsonAsync("Ratings", rating);
                 if (response.IsSuccessStatusCode)
-                {
                     return RedirectToAction(nameof(Index));
-                }
+
                 ModelState.AddModelError("", "Failed to create rating.");
+                return View(rating);
             }
-            return View(rating);
+            catch
+            {
+                ModelState.AddModelError("", "API connection failed.");
+                return View(rating);
+            }
         }
 
-        // GET: Rating/Edit/5
+        // GET: Ratings/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var rating = await _httpClient.GetFromJsonAsync<RatingViewModel>($"Ratings/{id}");
-            if (rating == null) return NotFound();
-
-            return View(rating);
+            try
+            {
+                var rating = await _httpClient.GetFromJsonAsync<RatingViewModel>($"Ratings/{id}");
+                if (rating == null) return NotFound();
+                return View(rating);
+            }
+            catch
+            {
+                TempData["Error"] = "Failed to load rating for edit.";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
-        // POST: Rating/Edit/5
+        // POST: Ratings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, RatingViewModel rating)
         {
             if (id != rating.Id) return BadRequest();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(rating);
+
+            try
             {
                 var response = await _httpClient.PutAsJsonAsync($"Ratings/{id}", rating);
                 if (response.IsSuccessStatusCode)
-                {
                     return RedirectToAction(nameof(Index));
-                }
+
                 ModelState.AddModelError("", "Failed to update rating.");
+                return View(rating);
             }
-            return View(rating);
+            catch
+            {
+                ModelState.AddModelError("", "API connection failed.");
+                return View(rating);
+            }
         }
 
-        // GET: Rating/Delete/5
+        // GET: Ratings/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var rating = await _httpClient.GetFromJsonAsync<RatingViewModel>($"Ratings/{id}");
-            if (rating == null) return NotFound();
-
-            return View(rating);
+            try
+            {
+                var rating = await _httpClient.GetFromJsonAsync<RatingViewModel>($"Ratings/{id}");
+                if (rating == null) return NotFound();
+                return View(rating);
+            }
+            catch
+            {
+                TempData["Error"] = "Failed to load rating for delete.";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
-        // POST: Rating/Delete/5
+        // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var response = await _httpClient.DeleteAsync($"Ratings/{id}");
-            if (response.IsSuccessStatusCode)
+            try
             {
+                var response = await _httpClient.DeleteAsync($"Ratings/{id}");
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction(nameof(Index));
+
+                TempData["Error"] = "Failed to delete rating.";
                 return RedirectToAction(nameof(Index));
             }
-
-            ModelState.AddModelError("", "Failed to delete rating.");
-            return RedirectToAction(nameof(Index));
+            catch
+            {
+                TempData["Error"] = "API connection failed.";
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

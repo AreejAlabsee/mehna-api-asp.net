@@ -165,32 +165,7 @@ class WelcomePage extends StatelessWidget {
                       right: 0,
                       child: Column(
                         children: [
-                          // زر worker
-                          SizedBox(
-                            width: buttonWidth,
-                            height: buttonHeight,
-                            child: ElevatedButton(
-                              onPressed: () {  
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: ((context) =>
-                                  WorkerSignInPage())));},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: darkOlive,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
-                              child: const Text(
-                                'start as worker',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-
+            
                           // زر costumer
                           SizedBox(
                             width: buttonWidth,
@@ -199,7 +174,7 @@ class WelcomePage extends StatelessWidget {
                               onPressed: ()  {  
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: ((context) =>
-                                  ClintSignPage())));},
+                                  SignPage())));},
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 side: BorderSide(color: darkOlive, width: 2),
@@ -208,7 +183,7 @@ class WelcomePage extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                'start as costumer',
+                                'start ',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: darkOlive,

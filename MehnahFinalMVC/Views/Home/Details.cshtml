@@ -1,0 +1,32 @@
+﻿
+@model MehnahFinalMVC.ViewModels.WorkDetailsViewModel
+
+@{
+    ViewData["Title"] = "تفاصيل العمل";
+}
+
+<h2>@Model.Work.Description</h2>
+
+<p>الفئة: @Model.Work.Category</p>
+<p>السعر: @Model.Work.Price</p>
+<p>متاح: @(Model.Work.IsAvailable ? "نعم" : "لا")</p>
+<p>طريقة التواصل: @Model.Work.ContactMethod</p>
+
+<hr />
+
+<h3>التقييمات</h3>
+@if (Model.Ratings != null && Model.Ratings.Any())
+{
+    <ul>
+        @foreach (var rating in Model.Ratings)
+        {
+            <li>
+                ⭐ @rating.Stars - @rating.Comment
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>لا توجد تقييمات لهذا العمل.</p>
+}

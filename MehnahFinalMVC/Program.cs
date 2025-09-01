@@ -7,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var handler = new HttpClientHandler();
+handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+var client = new HttpClient(handler);
 
 
 builder.Services.AddDbContext<AppicatDbContext>(options =>
@@ -15,18 +18,18 @@ builder.Services.AddDbContext<AppicatDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddHttpClient<WorksApiService>(c =>
 {
-    c.BaseAddress = new Uri("http://localhost:7232/api/");
+    c.BaseAddress = new Uri("http://192.168.1.104:7232/api/");
 });
 
 // تسجيل WorkerApiService مع HttpClient
 builder.Services.AddHttpClient<WorkerApiService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:7232/api/"); // رابط API الصحيح
+    client.BaseAddress = new Uri("http://192.168.1.104:7232/api/"); // رابط API الصحيح
 });
 
 builder.Services.AddHttpClient<RatingsApiService>(c =>
 {
-    c.BaseAddress = new Uri("http://localhost:7232/api/"); // رابط الـ API
+    c.BaseAddress = new Uri("http://192.168.1.104:7232/api/"); // رابط الـ API
 });
 
 // CORS (اختياري حسب احتياجك)

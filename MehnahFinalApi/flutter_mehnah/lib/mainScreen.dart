@@ -157,7 +157,7 @@ class _mainScreenState extends State<mainScreen> {
           onPressed: () {
             Navigator.pop(
               context,
-              MaterialPageRoute(builder: (context) => const ClintSignPage()),
+              MaterialPageRoute(builder: (context) => const SignPage()),
             );
           },
         ),
@@ -214,7 +214,9 @@ class _mainScreenState extends State<mainScreen> {
                 backgroundImage: NetworkImage(user.fullProfileImageUrl),
               ),
               title: Text(user.Name),
-              subtitle: Text(user.PhoneNumber),
+              subtitle: Row(children: [Text(user.PhoneNumber )],)
+             
+              
             ),
           ),
         );

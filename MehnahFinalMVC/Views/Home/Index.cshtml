@@ -1,474 +1,233 @@
-﻿    @* @model MehnahFinalMVC.ViewModels.HomeViewModel
+﻿@* @model MehnahFinalMVC.ViewModels.HomeViewModel
 
-    <!DOCTYPE html>
-    <html lang="ar" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mehnah - Find your dream design</title>
-        <style>
-            :root {
-                --primary-color: #384236;
-                --secondary-color: #A0A091;
-                --text-color: #333;
-                --light-bg: #EAEAE0;
-                --white-bg: #ffffff;
-                --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
+@{
+    ViewData["Title"] = "Home";
+}
 
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-                margin: 0;
-                background-color: var(--white-bg);
-                color: var(--text-color);
-            }
+<h2 class="mb-4">Works List</h2>
 
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 20px;
-            }
-
-            /* Header & Hero Section */
-            .hero-section {
-                background-color: var(--white-bg);
-                position: relative;
-                overflow: hidden;
-                padding: 80px 0;
-            }
-
-            .header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 25px 0;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 2;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 25px 20px;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: var(--primary-color);
-            }
-
-            .nav-links {
-                list-style: none;
-                display: flex;
-                margin: 0;
-                padding: 0;
-            }
-
-                .nav-links li {
-                    margin-right: 25px;
-                }
-
-                .nav-links a {
-                    text-decoration: none;
-                    color: var(--text-color);
-                    font-weight: 500;
-                    transition: color 0.3s;
-                }
-
-                    .nav-links a:hover {
-                        color: var(--primary-color);
-                    }
-
-            .hero-content {
-                display: flex;
-                align-items: center;
-                gap: 40px;
-                justify-content: space-between;
-                position: relative;
-                z-index: 1;
-            }
-
-            .hero-text {
-                flex: 1;
-                max-width: 600px;
-            }
-
-                .hero-text h1 {
-                    font-size: 2.5rem;
-                    line-height: 1.3;
-                    color: var(--primary-color);
-                    margin: 0;
-                }
-
-            .hero-image-container {
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 50%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 0;
-            }
-
-                .hero-image-container img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transform: scaleX(1);
-                }
-
-            /* Workers Section */
-            .workers-section {
-                padding: 80px 0;
-                background-color: var(--light-bg);
-            }
-
-            .section-title {
-                text-align: center;
-                font-size: 2rem;
-                margin-bottom: 50px;
-                color: var(--primary-color);
-            }
-
-            .workers-list {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 30px;
-            }
-
-            .worker-card {
-                background-color: var(--white-bg);
-                border-radius: 10px;
-                overflow: hidden;
-                box-shadow: var(--box-shadow);
-                text-align: center;
-                padding: 25px;
-                transition: transform 0.3s ease;
-            }
-
-                .worker-card:hover {
-                    transform: translateY(-5px);
-                }
-
-                .worker-card img {
-                    width: 80px;
-                    height: 80px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-bottom: 20px;
-                }
-
-                .worker-card h3 {
-                    margin: 0;
-                    font-size: 1.1rem;
-                    color: var(--primary-color);
-                }
-
-                .worker-card p {
-                    margin: 5px 0 20px 0;
-                    color: var(--secondary-color);
-                    font-size: 0.8rem;
-                }
-
-            .rating {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 20px;
-            }
-
-                .rating .star {
-                    color: #FFD700;
-                    margin: 0 2px;
-                    font-size: 1rem;
-                }
-
-            .view-profile-btn {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: var(--primary-color);
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 0.8rem;
-                transition: background-color 0.3s;
-            }
-
-                .view-profile-btn:hover {
-                    background-color: #2a3328;
-                }
-
-            /* Comments Section */
-            .comments-section {
-                padding: 80px 0;
-                background-color: var(--white-bg);
-            }
-
-            .comments-list {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 30px;
-            }
-
-            .comment-card {
-                background-color: var(--light-bg);
-                border-radius: 10px;
-                box-shadow: var(--box-shadow);
-                padding: 25px;
-                width: 300px;
-                text-align: right;
-            }
-
-                .comment-card .user-info {
-                    display: flex;
-                    align-items: center;
-                    gap: 15px;
-                    margin-bottom: 20px;
-                }
-
-                    .comment-card .user-info img {
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                    }
-
-                    .comment-card .user-info h4 {
-                        margin: 0;
-                        font-size: 1rem;
-                    }
-
-                .comment-card .comment-text {
-                    font-size: 0.9rem;
-                    color: var(--text-color);
-                    line-height: 1.6;
-                }
-
-            /* Download Section */
-            .download-section {
-                background-color: var(--light-bg);
-                padding: 80px 0;
-            }
-
-            .download-content {
-                display: flex;
-                align-items: center;
-                gap: 60px;
-                flex-direction: row-reverse;
-            }
-
-            .download-text {
-                flex: 1;
-                text-align: right;
-                order: 2;
-            }
-
-                .download-text h2 {
-                    font-size: 2rem;
-                    color: var(--primary-color);
-                    margin-bottom: 25px;
-                }
-
-                .download-text p {
-                    max-width: 400px;
-                    line-height: 1.6;
-                    margin-bottom: 25px;
-                }
-
-            .download-btn {
-                display: inline-block;
-                padding: 14px 30px;
-                background-color: var(--primary-color);
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                transition: background-color 0.3s;
-            }
-
-                .download-btn:hover {
-                    background-color: #2a3328;
-                }
-
-            .download-image-container {
-                flex: 1;
-                text-align: left;
-                order: 1;
-            }
-
-                .download-image-container img {
-                    max-width: 300px;
-                    height: auto;
-                }
-
-            /* Footer */
-            footer {
-                background-color: var(--primary-color);
-                color: #fff;
-                padding: 30px 0;
-                text-align: center;
-            }
-
-                footer .logo {
-                    font-size: 1.2rem;
-                    color: #fff;
-                }
-        </style>
-    </head>
-    <body>
-
-        <header class="hero-section">
-            <div class="container header">
-                <div class="logo">Mehnah</div>
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="#">Workers</a></li>
-                        <li><a href="#">App</a></li>
-                        <li><a href="#">Comment</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <h1>Find your dream design for your home!</h1>
-                </div>
-            </div>
-            <div class="hero-image-container">
-                <img src="@Url.Content("~/images/home.png")" alt="Home Design" />
-            </div>
-        </header>
-
-        <main>
-            <section class="workers-section">
-                <div class="container">
-                    <h2 class="section-title">Workers</h2>
-                    <div class="workers-list" id="workers-container">
-                        <p id="loading-message">Loading workers...</p>
+@if (Model.Works != null && Model.Works.Any())
+{
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var work in Model.Works)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@work.Description</h5>
+                        <p class="card-text">
+                            <strong>Category:</strong> @work.Category <br />
+                            <strong>Price:</strong> @work.Price <br />
+                            <strong>Available:</strong> @(work.IsAvailable ? "Yes" : "No")
+                        </p>
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("Details", "Home", new { id = work.Id })">Details</a>
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", "Home", new { id = work.Id })">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Home", new { id = work.Id })">Delete</a>
                     </div>
                 </div>
-            </section>
-
-            <section class="comments-section">
-                <div class="container">
-                    <h2 class="section-title">what people say about us</h2>
-                    <div class="comments-list" id="comments-container">
-                        <p id="loading-comments-message">Loading comments...</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="download-section">
-                <div class="container download-content">
-                    <div class="download-text">
-                        <h2>Download Our App</h2>
-                        <p>Download Our AppDownload Our AppDownload Our AppDownload Our AppDownload Our AppDownload Our AppDownload Our AppDownload Our App</p>
-                        <a href="https://play.google.com/store/apps" class="download-btn">Download</a>
-                    </div>
-                    <div class="download-image-container">
-                        <img src="@Url.Content("~/images/phone.png")" alt="App Screenshot" />
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="container">
-                <div class="logo">Mehnah</div>
             </div>
-        </footer>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // دالة لعرض النجوم (حالياً لا يوجد تقييم في موديل User مباشرة)
-                function getStarRating(stars) {
-                    let ratingHtml = '';
-                    for (let i = 0; i < 5; i++) {
-                        ratingHtml += `<span class="star">${i < stars ? '★' : '☆'}</span>`;
-                    }
-                    return ratingHtml;
-                }
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No works available.</p>
+}
 
-                جلب العمال
-                async function fetchWorkers() {
-                    const workersContainer = document.getElementById('workers-container');
-                try {const response = await fetch('https://localhost:7232/api/Users?role=worker');
+<hr class="my-5" />
 
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        const workers = await response.json();
-                        workersContainer.innerHTML = '';
+<h2 class="mb-4">Ratings</h2>
 
-                        workers.forEach(worker => {
-                            const workerCard = document.createElement('div');
-                            workerCard.classList.add('worker-card');
-                            workerCard.innerHTML = `
-                                       <img src="${worker.profileImage ? '/uploads/' + worker.profileImage : 'https://localhost:7232'}" alt="${worker.name}">
-        <h3>${worker.name}</h3>
-                                <p>${worker.phoneNumber}</p>
-                                <div class="rating">
-                                    ${getStarRating(worker.averageRating || 0)}
-                                </div>
-                                <a href="#" class="view-profile-btn">عرض الملف</a>
-                            `;
-                            workersContainer.appendChild(workerCard);
-                        });
-                    } catch (error) {
-                        console.error("Could not fetch workers:", error);
-                        workersContainer.innerHTML = `<p style="color: red; text-align: center;">فشل تحميل بيانات العمال</p>`;
-                    }
-                }
+@if (Model.Ratings != null && Model.Ratings.Any())
+{
+    <div class="list-group">
+        @foreach (var rating in Model.Ratings)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start mb-2 shadow-sm">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Work ID: @rating.WorkId</h5>
+                    <small>⭐ @rating.Stars</small>
+                </div>
+                <p class="mb-1">@rating.Comment</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No ratings yet.</p>
+} *@
+@* @model MehnahFinalMVC.ViewModels.HomeViewModel
 
+@{
+    ViewData["Title"] = "Home";
+}
 
-            @foreach (var work in Model.Works)
-            {
-                    <p>@work.Description</p>
-            }
+<h2 class="mb-4">Workers</h2>
 
-            @foreach (var user in Model.Users)
-            {
-                    <p>@user.Name</p>
-            }
+@if (Model.Users != null && Model.Users.Any())
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var worker in Model.Users)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="@worker.ProfileImage" class="card-img-top" alt="@worker.Name" style="height:200px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@worker.Name</h5>
+                        <p class="card-text">
+                            <strong>Phone:</strong> @worker.PhoneNumber <br />
+                            <strong>Type:</strong> @worker.UserType
+                        </p>
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("Details", "Workers", new { id = worker.Id })">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No workers available.</p>
+}
 
-            @foreach (var rating in Model.Ratings)
-            {
-                    <p>@rating.Comment</p>
-            }
-                // جلب التعليقات
-                async function fetchComments() {
-                    const commentsContainer = document.getElementById('comments-container');
-                    try {
-                        const response = await fetch('https://localhost:7232/api/Ratings');
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        const comments = await response.json();
-                        commentsContainer.innerHTML = '';
+<hr class="my-5" />
 
-                        comments.forEach(comment => {
-                            const commentCard = document.createElement('div');
-                            commentCard.classList.add('comment-card');
-                            commentCard.innerHTML = `
-                                <div class="user-info">
-                                    <img src="${comment.userImage || 'https://via.placeholder.com/40'}" alt="${comment.userName}">
-                                    <h4>${comment.userName}</h4>
-                                </div>
-                                <div class="rating">
-                                    ${getStarRating(comment.stars || 0)}
-                                </div>
-                                <p class="comment-text">${comment.text}</p>
-                            `;
-                            commentsContainer.appendChild(commentCard);
-                        });
-                    } catch (error) {
-                        console.error("Could not fetch comments:", error);
-                        commentsContainer.innerHTML = `<p style="color: red; text-align: center;">فشل تحميل التعليقات</p>`;
-                    }
-                }
+<h2 class="mb-4">Works List</h2>
 
-                fetchWorkers();
-                fetchComments();
-            });
-        </script>
-    </body>
-    </html> *@
+@if (Model.Works != null && Model.Works.Any())
+{
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var work in Model.Works)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@work.Description</h5>
+                        <p class="card-text">
+                            <strong>Category:</strong> @work.Category <br />
+                            <strong>Price:</strong> @work.Price <br />
+                            <strong>Available:</strong> @(work.IsAvailable ? "Yes" : "No")
+                        </p>
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("Details", "Home", new { id = work.Id })">Details</a>
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", "Home", new { id = work.Id })">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Home", new { id = work.Id })">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No works available.</p>
+}
+
+<hr class="my-5" />
+
+<h2 class="mb-4">Ratings</h2>
+
+@if (Model.Ratings != null && Model.Ratings.Any())
+{
+    <div class="list-group">
+        @foreach (var rating in Model.Ratings)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start mb-2 shadow-sm">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Work ID: @rating.WorkId</h5>
+                    <small>⭐ @rating.Stars</small>
+                </div>
+                <p class="mb-1">@rating.Comment</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No ratings yet.</p>
+} *@
+@model MehnahFinalMVC.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2 class="mb-4">Workers</h2>
+
+@if (Model.Users != null && Model.Users.Any())
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+        @foreach (var worker in Model.Users)
+        {
+            
+
+            <div class="card-body">
+                <h5 class="card-title">@worker.Name</h5>
+                <p class="card-text">
+                    <strong>Phone:</strong> @worker.PhoneNumber <br />
+                    <strong>Type:</strong> @worker.UserType
+                </p>
+            </div>
+      
+    
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No workers available.</p>
+}
+
+<hr class="my-5" />
+
+<h2 class="mb-4">Works List</h2>
+
+@if (Model.Works != null && Model.Works.Any())
+{
+    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+        @foreach (var work in Model.Works)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@work.Description</h5>
+                        <p class="card-text">
+                            <strong>Category:</strong> @work.Category <br />
+                            <strong>Price:</strong> @work.Price <br />
+                            <strong>Available:</strong> @(work.IsAvailable ? "Yes" : "No")
+                        </p>
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("Details", "Home", new { id = work.Id })">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No works available.</p>
+}
+
+<hr class="my-5" />
+
+<h2 class="mb-4">Ratings</h2>
+
+@if (Model.Ratings != null && Model.Ratings.Any())
+{
+    <div class="list-group mb-5">
+        @foreach (var rating in Model.Ratings)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start mb-2 shadow-sm">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Work ID: @rating.WorkId</h5>
+                    <small>⭐ @rating.Stars</small>
+                </div>
+                <p class="mb-1">@rating.Comment</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="text-muted">No ratings yet.</p>
+}

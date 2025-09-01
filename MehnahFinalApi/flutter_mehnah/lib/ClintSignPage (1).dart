@@ -1,54 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mehnah/mainScreen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ClintSignPage extends StatefulWidget {
-  const ClintSignPage({super.key});
+class SignPage extends StatefulWidget {
+  const SignPage({super.key});
 
   @override
-  State<ClintSignPage> createState() => _ClintSignPageState();
+  State<SignPage> createState() => _SignPageState();
 }
 
-class _ClintSignPageState extends State<ClintSignPage> {
+class _SignPageState extends State<SignPage> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _phoneController = TextEditingController();
   String _selectedType = "Worker";
 
-Future<void> _register() async {
-  const apiUrl = "https://0.0.0.0:7219/api/Users";
+// Future<void> _register() async {
+//   const apiUrl = 'http://192.168.1.104:7232/api/Works';
 
-  try {
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "Name": _usernameController.text.trim(),
-        "Password": _passwordController.text.trim(),
-        "PhoneNumber": _phoneController.text.trim(),
-        "UserType": _selectedType
-      }),
-    );
+//   try {
+//     final response = await http.post(
+//       Uri.parse(apiUrl),
+//       headers: {"Content-Type": "application/json"},
+//       body: jsonEncode({
+//         "Name": _usernameController.text.trim(),
+//         "Password": _passwordController.text.trim(),
+//         "PhoneNumber": _phoneController.text.trim(),
+//         "UserType": _selectedType
+//       }),
+//     );
 
-    print("Status code: ${response.statusCode}");
-    print("Response body: ${response.body}");
+//     print("Status code: ${response.statusCode}");
+//     print("Response body: ${response.body}");
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("✅ User created successfully")),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("❌ Failed: ${response.body}")),
-      );
-    }
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("⚠️ Error: $e")),
-    );
-  }
-}
+//     if (response.statusCode >= 200 && response.statusCode < 300) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text("✅ User created successfully")),
+//       );
+//     } else {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(content: Text("❌ Failed: ${response.body}")),
+//       );
+//     }
+//   } catch (e) {
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       SnackBar(content: Text("⚠️ Error: $e")),
+//     );
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +140,11 @@ Future<void> _register() async {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _register();
+                          
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((context) =>
+                                  mainScreen())));
+                        // _register();
                       }
                     },
                     child: const Text("Login"),

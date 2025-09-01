@@ -1,0 +1,41 @@
+﻿@model MehnahFinalApi.DTO.WorkDto
+
+@{
+    ViewData["Title"] = "تعديل العمل";
+}
+
+<h2>تعديل العمل</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label>الوصف</label>
+        <input asp-for="Description" />
+    </div>
+    <div>
+        <label>الفئة</label>
+        <input asp-for="Category" />
+    </div>
+    <div>
+        <label>السعر</label>
+        <input asp-for="Price" type="number" />
+    </div>
+    <div>
+        <label>المستخدم (UserId)</label>
+        <input asp-for="UserId" type="number" />
+    </div>
+    <div>
+        <label>طريقة التواصل</label>
+        <input asp-for="ContactMethod" />
+    </div>
+    <div>
+        <label>متاح</label>
+        <input asp-for="IsAvailable" type="checkbox" />
+    </div>
+    <div>
+        <label>صور العمل (تحديث)</label>
+        <input type="file" name="WorkImages" />
+    </div>
+    <button type="submit">حفظ التعديلات</button>
+</form>
